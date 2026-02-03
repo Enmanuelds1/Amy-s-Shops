@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎁 Amy's Shops - Regalos Personalizados</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #E91E63;
+            --secondary: #9C27B0;
+            --accent: #FF9800;
+            --light: #FFF9F9;
+            --dark: #333333;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --gradient-light: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        }
+        
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            padding-top: 80px;
+        }
+        
+        .cursive {
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .elegant {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Navbar */
+        .navbar {
+            background: white !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 15px 0;
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary) !important;
+        }
+        
+        .brand-logo {
+            color: var(--primary);
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-link {
+            color: var(--dark) !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary) !important;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .badge-cart {
+            background-color: var(--accent) !important;
+            font-size: 0.7rem;
+            position: absolute;
+            top: -8px;
+            right: -8px;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            background: var(--light);
+            color: var(--dark);
+            padding: 80px 0 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') no-repeat center right;
+            background-size: cover;
+            opacity: 0.1;
+            border-radius: 40% 0 0 40%;
+        }
+        
+        .hero-title {
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero-highlight {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .hero-section::before {
+                display: none;
+            }
+        }
+        
+        /* Product Cards */
+        .product-card {
+            border: none;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            height: 100%;
+            background: white;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(233, 30, 99, 0.15);
+        }
+        
+        .product-img {
+            height: 220px;
+            object-fit: cover;
+            width: 100%;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-img {
+            transform: scale(1.05);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 0.8rem;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        
+        .product-price {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .btn-add-cart {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        
+        .btn-add-cart:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(233, 30, 99, 0.3);
+            color: white;
+        }
+        
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .btn-whatsapp:hover {
+            background-color: #128C7E;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+        
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -500px;
+            width: 450px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.1);
+            z-index: 1050;
+            transition: right 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            overflow-y: auto;
+        }
+        
+        @media (max-width: 576px) {
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+        }
+        
+        .cart-sidebar.open {
+            right: 0;
+        }
+        
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1040;
+            display: none;
+            backdrop-filter: blur(5px);
+        }
+        
+        .cart-overlay.show {
+            display: block;
+        }
+        
+        .cart-item {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+        
+        .cart-total {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        /* Form Styles */
+        .form-control, .form-select {
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 12px 15px;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(233, 30, 99, 0.25);
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+        
+        .checkbox-custom {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--primary);
+            margin-right: 10px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+            margin-top: 80px;
+        }
+        
+        .footer-title {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient);
+        }
+        
+        .contact-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            transition: all 0.3s;
+        }
+        
+        .contact-icon:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+        }
+        
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            width: 70px;
+            height: 70px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 35px;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            transform: scale(1.1) rotate(5deg);
+            color: white;
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
+        }
+        
+        /* Category Filter - CORREGIDO */
+        .category-filter {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        
+        .category-badge {
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 500;
+            margin: 5px;
+            border: 2px solid #e9ecef;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 120px;
+        }
+        
+        .category-badge:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary);
+        }
+        
+        .category-badge.active {
+            background: var(--gradient) !important;
+            color: white !important;
+            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.2);
+            border-color: transparent;
+        }
+        
+        .category-icon {
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+        
+        /* Testimonials - MEJORADO */
+        .testimonial-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 100px;
+            color: rgba(233, 30, 99, 0.1);
+            font-family: 'Times New Roman', serif;
+            line-height: 1;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(233, 30, 99, 0.1);
+        }
+        
+        .testimonial-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .rating {
+            color: #FFD700;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .client-name {
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .client-title {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        /* Stats */
+        .stat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-10px);
+            background: var(--gradient);
+            color: white;
+        }
+        
+        .stat-card:hover .stat-number,
+        .stat-card:hover .stat-title {
+            color: white;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .stat-title {
+            font-size: 1.2rem;
+            color: var(--dark);
+            font-weight: 600;
+        }
+        
+        /* Feature Icons */
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2rem;
+            transition: all 0.3s;
+        }
+        
+        .feature-icon:hover {
+            transform: rotate(15deg) scale(1.1);
+        }
+        
+        /* Cart Empty State */
+        .cart-empty {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .cart-empty-icon {
+            font-size: 4rem;
+            color: #e9ecef;
+            margin-bottom: 20px;
+        }
+        
+        /* Steps */
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin: 0 auto 20px;
+        }
+        
+        /* Delivery Options */
+        .delivery-option {
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 15px;
+        }
+        
+        .delivery-option:hover {
+            border-color: var(--primary);
+            background-color: rgba(233, 30, 99, 0.05);
+        }
+        
+        .delivery-option.selected {
+            border-color: var(--primary);
+            background-color: rgba(233, 30, 99, 0.1);
+        }
+        
+        .delivery-price {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        }
+        
+        /* Product Count */
+        .product-count {
+            background: var(--gradient);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        /* Section Titles */
+        .section-title {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+        
+        .section-title.text-center::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Testimonial Section */
+        .testimonial-section {
+            background: linear-gradient(135deg, #fdf2ff 0%, #fff0f7 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonial-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path fill="%23E91E63" fill-opacity="0.05" d="M45.2,-58.9C58.1,-48.7,67.4,-32.8,70.5,-16.6C73.6,-0.4,70.5,16.1,63.3,30.9C56.1,45.7,44.8,58.8,30.2,66.1C15.6,73.4,-2.3,74.8,-18.5,70.1C-34.7,65.4,-49.2,54.6,-59.8,40.1C-70.4,25.6,-77.1,7.3,-75.3,-10.2C-73.5,-27.7,-63.2,-44.5,-48.3,-54.6C-33.5,-64.6,-13.8,-67.8,2.6,-71C19,-74.2,32.3,-69,45.2,-58.9Z" transform="translate(100 100)"/></svg>') no-repeat;
+            background-size: contain;
+        }
+    </style>
+</head>
+<body>
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/+5352013170" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand elegant" href="#">
+                <span class="brand-logo">Amy's Shops</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#inicio">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#productos">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#nosotros">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contacto">Contacto</a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <button class="btn btn-outline-primary position-relative" onclick="toggleCart()">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span id="cart-count" class="badge badge-cart rounded-pill">0</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="hero-title elegant">
+                        <span class="hero-highlight">Regalos Personalizados</span><br>
+                        Que Capturan Momentos Especiales
+                    </h1>
+                    <p class="lead mb-4" style="font-size: 1.2rem;">
+                        En <strong>Amy's Shops</strong> transformamos tus ideas en regalos únicos e inolvidables. 
+                        Especialistas en personalización con los mejores materiales y diseños exclusivos.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#productos" class="btn btn-primary btn-lg px-4 py-3">
+                            <i class="fas fa-gifts me-2"></i> Explorar Productos
+                        </a>
+                        <a href="https://wa.me/+5352013170" target="_blank" class="btn btn-success btn-lg px-4 py-3">
+                            <i class="fab fa-whatsapp me-2"></i> Pedir por WhatsApp
+                        </a>
+                    </div>
+                    
+                    <!-- Stats -->
+                    <div class="row mt-5">
+                        <div class="col-md-4 mb-3">
+                            <div class="stat-card">
+                                <div class="stat-number">500+</div>
+                                <div class="stat-title">Clientes Satisfechos</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="stat-card">
+                                <div class="stat-number">28+</div>
+                                <div class="stat-title">Productos Únicos</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="stat-card">
+                                <div class="stat-number">100%</div>
+                                <div class="stat-title">Personalizado</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features -->
+    <section class="py-5 bg-white">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col text-center">
+                    <h2 class="display-5 fw-bold text-primary mb-3">¿Por qué elegir Amy's Shops?</h2>
+                    <p class="lead text-muted">La mejor experiencia en regalos personalizados</p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4 class="text-center fw-bold mb-3">Calidad Premium</h4>
+                    <p class="text-center text-muted">Materiales de primera calidad que garantizan durabilidad y excelente presentación en cada producto.</p>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h4 class="text-center fw-bold mb-3">Diseños Exclusivos</h4>
+                    <p class="text-center text-muted">Cada diseño es único y creado especialmente para ti, reflejando tu personalidad.</p>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h4 class="text-center fw-bold mb-3">Entrega Rápida</h4>
+                    <p class="text-center text-muted">Servicio de mensajería disponible para que recibas tu pedido en tiempo récord.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Products Section -->
+    <section id="productos" class="py-5 bg-light">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col text-center">
+                    <h2 class="display-4 fw-bold text-primary mb-3 elegant">Nuestros Productos</h2>
+                    <p class="lead text-muted">Selecciona tus favoritos y personalízalos a tu gusto</p>
+                </div>
+            </div>
+            
+            <!-- Category Filter - MEJORADO -->
+            <div class="category-filter fade-in-up">
+                <div class="text-center mb-4">
+                    <h4 class="fw-bold text-dark mb-3">Filtrar por Categoría</h4>
+                </div>
+                <div class="d-flex flex-wrap justify-content-center">
+                    <span class="badge bg-primary category-badge active px-4 py-2" data-category="all">
+                        <i class="category-icon fas fa-boxes"></i> Todos
+                    </span>
+                    <span class="badge bg-light text-dark category-badge px-4 py-2" data-category="ropa">
+                        <i class="category-icon fas fa-tshirt"></i> Ropa
+                    </span>
+                    <span class="badge bg-light text-dark category-badge px-4 py-2" data-category="decoracion">
+                        <i class="category-icon fas fa-palette"></i> Decoración
+                    </span>
+                    <span class="badge bg-light text-dark category-badge px-4 py-2" data-category="hogar">
+                        <i class="category-icon fas fa-home"></i> Hogar
+                    </span>
+                    <span class="badge bg-light text-dark category-badge px-4 py-2" data-category="accesorios">
+                        <i class="category-icon fas fa-gem"></i> Accesorios
+                    </span>
+                </div>
+                <div class="text-center mt-4">
+                    <span id="product-count" class="product-count">Mostrando 16 productos</span>
+                </div>
+            </div>
+            
+            <!-- Products Container -->
+            <div id="products-container" class="row g-4">
+                <!-- Los productos se cargarán aquí dinámicamente -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials - MEJORADO -->
+    
+    
+    <!-- About Section -->
+    <section id="nosotros" class="py-5 bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h2 class="display-5 fw-bold text-primary mb-4 elegant">Sobre Amy's Shops</h2>
+                    <p class="lead mb-4">
+                        Somos especialistas en regalos personalizados con los mejores materiales y diseños exclusivos. 
+                        Desde nuestros inicios, nos hemos dedicado a transformar ideas en recuerdos tangibles que perduran en el tiempo.
+                    </p>
+                    <p class="mb-4">
+                        Cada producto que creamos cuenta una historia única, adaptándonos a las preferencias y necesidades 
+                        de cada cliente. Creemos que los regalos más valiosos son aquellos que llevan un pedazo del corazón 
+                        de quien los regala.
+                    </p>
+                    <a href="#contacto" class="btn btn-primary btn-lg px-4">
+                        <i class="fas fa-phone-alt me-2"></i> Contáctanos
+                    </a>
+                </div>
+                <div class="col-lg-6">
+                    <div class="bg-white p-4 rounded-4 shadow-lg">
+                        <h4 class="text-center mb-4 text-primary">Nuestro Proceso</h4>
+                        <div class="row text-center">
+                            <div class="col-4">
+                                <div class="step-number">1</div>
+                                <h6>Elige tu producto</h6>
+                            </div>
+                            <div class="col-4">
+                                <div class="step-number">2</div>
+                                <h6>Personalízalo</h6>
+                            </div>
+                            <div class="col-4">
+                                <div class="step-number">3</div>
+                                <h6>Recíbelo</h6>
+                            </div>
+                        </div>
+                        <div class="text-center mt-4">
+                            <p class="text-muted">
+                                <i class="fas fa-info-circle text-primary me-2"></i>
+                                Trabajamos contigo en cada paso del proceso
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contacto" class="py-5 bg-white">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col text-center">
+                    <h2 class="display-4 fw-bold text-primary mb-3 elegant">Contacto</h2>
+                    <p class="lead text-muted">Estamos aquí para ayudarte a crear el regalo perfecto</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="card border-0 shadow-lg h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="contact-icon mx-auto mb-3">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h5 class="card-title fw-bold">Dirección</h5>
+                            <p class="card-text text-muted">
+                                Calle 198 # 29305<br>
+                                entre 293 y 295<br>
+                                Calixto Sanchez, Boyeros
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <div class="card border-0 shadow-lg h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="contact-icon mx-auto mb-3">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <h5 class="card-title fw-bold">Teléfono / WhatsApp</h5>
+                            <p class="card-text">
+                                <a href="tel:+5352013170" class="text-decoration-none text-dark fw-bold fs-5">
+                                    +53 5 2013170
+                                </a>
+                            </p>
+                            <small class="text-muted">Disponible de Lunes a Sábado</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <div class="card border-0 shadow-lg h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="contact-icon mx-auto mb-3">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h5 class="card-title fw-bold">Horario de Atención</h5>
+                            <p class="card-text text-muted">
+                                <strong>Lunes - Viernes:</strong><br>
+                                9:00 am - 5:00 pm<br>
+                                <strong>Sábado:</strong> 9:00 am - 1:00 pm<br>
+                                <strong>Domingo:</strong> Cerrado
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col text-center">
+                    <div class="bg-primary text-white p-5 rounded-4 shadow-lg">
+                        <h3 class="mb-3">¿Listo para personalizar tu regalo?</h3>
+                        <p class="mb-4">Contáctanos ahora y haremos realidad tu idea</p>
+                        <a href="https://wa.me/+5352013170" target="_blank" class="btn btn-light btn-lg px-5">
+                            <i class="fab fa-whatsapp me-2"></i> Contactar por WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h4 class="footer-title elegant">
+                        Amy's Shops
+                    </h4>
+                    <p>Especialistas en regalos personalizados con los mejores materiales y diseños exclusivos para ocasiones especiales.</p>
+                    <div class="d-flex mt-4">
+                        <a href="#" class="contact-icon me-3">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="contact-icon me-3">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/5352013170" target="_blank" class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <h5 class="footer-title">Enlaces Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#inicio" class="text-white-50 text-decoration-none">Inicio</a></li>
+                        <li class="mb-2"><a href="#productos" class="text-white-50 text-decoration-none">Productos</a></li>
+                        <li class="mb-2"><a href="#nosotros" class="text-white-50 text-decoration-none">Sobre Nosotros</a></li>
+                        <li class="mb-2"><a href="#contacto" class="text-white-50 text-decoration-none">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <h5 class="footer-title">Información de Contacto</h5>
+                    <div class="mb-3">
+                        <p class="text-white-50 mb-1">
+                            <i class="fas fa-envelope me-2"></i> amyriveracabrera@gmail.com
+                        </p>
+                        <p class="text-white-50 mb-1">
+                            <i class="fas fa-phone me-2"></i> +53 52013170
+                        </p>
+                        <p class="text-white-50">
+                            <i class="fas fa-map-marker-alt me-2"></i> Boyeros, La Habana
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="bg-white my-4">
+            
+            <div class="row">
+                <div class="col text-center">
+                    <p class="mb-0 text-white-50">
+                        © 2026 <strong>Amy's Shops</strong>. Todos los derechos reservados. | Tienda de Regalos Personalizados
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Cart Sidebar -->
+    <div id="cart-overlay" class="cart-overlay" onclick="toggleCart()"></div>
+    
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="p-4 h-100 d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 class="text-primary elegant mb-0">
+                    <i class="fas fa-shopping-cart me-2"></i> Tu Carrito
+                </h3>
+                <button type="button" class="btn-close" onclick="toggleCart()"></button>
+            </div>
+            
+            <div id="cart-items" class="flex-grow-1 mb-4" style="overflow-y: auto;">
+                <!-- Los items del carrito se cargarán aquí -->
+                <div class="cart-empty">
+                    <div class="cart-empty-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h5 class="text-muted">Tu carrito está vacío</h5>
+                    <p class="text-muted">Agrega productos para verlos aquí</p>
+                    <button class="btn btn-primary mt-3" onclick="toggleCart()">
+                        <i class="fas fa-store me-2"></i> Seguir Comprando
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Formulario de datos del cliente -->
+            <div id="customer-form" style="display: none;">
+                <h5 class="fw-bold mb-3">Datos del Cliente</h5>
+                
+                <div class="mb-3">
+                    <label class="form-label">Nombre Completo *</label>
+                    <input type="text" id="customer-name" class="form-control" placeholder="Ej: María Rodríguez Pérez" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Teléfono *</label>
+                    <input type="tel" id="customer-phone" class="form-control" placeholder="Ej: +53 5xxxxxxx" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Dirección *</label>
+                    <textarea id="customer-address" class="form-control" rows="2" placeholder="Dirección completa para la entrega" required></textarea>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Método de Entrega</label>
+                    <div id="delivery-options">
+                        <div class="delivery-option" data-type="pickup" onclick="selectDelivery(this, 'pickup')">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="fw-bold mb-1">Recogida en Tienda</h6>
+                                    <p class="text-muted small mb-0">Recoge tu pedido en nuestra dirección</p>
+                                </div>
+                                <div class="delivery-price">Gratis</div>
+                            </div>
+                        </div>
+                        
+                        <div class="delivery-option" data-type="delivery" onclick="selectDelivery(this, 'delivery')">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="fw-bold mb-1">Entrega a Domicilio</h6>
+                                    <p class="text-muted small mb-0">Mensajería en 24-48 horas</p>
+                                </div>
+                                <div class="delivery-price">Relativo</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Notas Adicionales</label>
+                    <textarea id="customer-notes" class="form-control" rows="2" placeholder="Instrucciones especiales o detalles del pedido"></textarea>
+                </div>
+            </div>
+            
+            <div class="border-top pt-3">
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Subtotal:</span>
+                    <span id="cart-subtotal" class="fw-bold">0 CUP</span>
+                </div>
+                
+                <div class="d-flex justify-content-between mb-3" id="delivery-cost-row" style="display: none;">
+                    <span>Costo de entrega:</span>
+                    <span id="delivery-cost" class="fw-bold">0 CUP</span>
+                </div>
+                
+                <div class="d-flex justify-content-between mb-3 border-top pt-2">
+                    <span class="fw-bold">Total:</span>
+                    <span id="cart-total" class="cart-total">0 CUP</span>
+                </div>
+                
+                <div class="d-grid gap-2">
+                    <button id="checkout-btn" class="btn btn-primary btn-lg" onclick="showCustomerForm()">
+                        <i class="fas fa-credit-card me-2"></i> Proceder al Pago
+                    </button>
+                    
+                    <button id="send-order-btn" class="btn btn-success btn-lg" style="display: none;" onclick="sendOrder()">
+                        <i class="fab fa-whatsapp me-2"></i> Enviar Pedido por WhatsApp
+                    </button>
+                    
+                    <button class="btn btn-outline-secondary" onclick="clearCart()">
+                        <i class="fas fa-trash me-2"></i> Vaciar Carrito
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- React y Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Aplicación React -->
+    <script type="text/babel">
+        // ========== DATOS CON FOTOS REALES ==========
+        const productsData = [
+            { 
+                id: 1, 
+                name: "Delantales Personalizados", 
+                price: "1800 CUP", 
+                originalPrice: 1800,
+                category: "ropa", 
+                available: true,
+                image: "fotos/delantar-blanco.png",
+                description: "Delantales con diseño personalizado"
+            },
+            { 
+                id: 2, 
+                name: "Imanes Decorativos", 
+                price: "900 - 1200 CUP", 
+                originalPrice: 900,
+                category: "decoracion", 
+                available: true,
+                image: "fotos/imanes.jpeg",
+                description: "Varios diseños y tamaños"
+            },
+            { 
+                id: 3, 
+                name: "Jabas de Tela", 
+                price: "1500 CUP", 
+                originalPrice: 1500,
+                category: "hogar", 
+                available: true,
+                image: "fotos/jaba-tela.png",
+                description: "Bolsas de tela personalizadas"
+            },
+            { 
+                id: 4, 
+                name: "Jarra Cervezera", 
+                price: "2500 CUP", 
+                originalPrice: 2500,
+                category: "hogar", 
+                available: true,
+                image: "fotos/jarra-cervezera.png",
+                description: "Jarra especial para cerveza"
+            },
+            { 
+                id: 5, 
+                name: "Jarra Clásica", 
+                price: "1600 CUP", 
+                originalPrice: 1600,
+                category: "hogar", 
+                available: true,
+                image: "fotos/jarras.jpeg",
+                description: "Jarra tradicional personalizada"
+            },
+            { 
+                id: 6, 
+                name: "Jarra Térmica Blanca", 
+                price: "3800 CUP", 
+                originalPrice: 3800,
+                category: "hogar", 
+                available: true,
+                image: "fotos/jarra-termica-blanca.png",
+                description: "Mantiene la temperatura de tus bebidas"
+            },
+            { 
+                id: 7, 
+                name: "Llaveros Corazón", 
+                price: "750 CUP", 
+                originalPrice: 750,
+                category: "accesorios", 
+                available: true,
+                image: "fotos/llaveros corazon.jpeg",
+                description: "Forma de corazón personalizado"
+            },
+            { 
+                id: 8, 
+                name: "Llaveros Rectangulares", 
+                price: "750 CUP", 
+                originalPrice: 750,
+                category: "accesorios", 
+                available: true,
+                image: "fotos/llavero_rect.jpeg",
+                description: "Doble personalización disponible"
+            },
+            { 
+                id: 9, 
+                name: "Cojines Decorativos", 
+                price: "1800 CUP", 
+                originalPrice: 1800,
+                category: "hogar", 
+                available: true,
+                image: "fotos/cogines.png",
+                description: "Cojines con diseños exclusivos"
+            },
+            { 
+                id: 10, 
+                name: "Conjunto para Niños", 
+                price: "2500 CUP", 
+                originalPrice: 2500,
+                category: "ropa", 
+                available: true,
+                image: "fotos/conjunto-niños.png",
+                description: "Conjunto personalizado para niños"
+            },
+            { 
+                id: 11, 
+                name: "Termos de Café", 
+                price: "4000 CUP", 
+                originalPrice: 4000,
+                category: "hogar", 
+                available: true,
+                image: "fotos/termos-cafe.png",
+                description: "Termos personalizados para café"
+            },
+            { 
+                id: 12, 
+                name: "Monitos de Bebé", 
+                price: "1200 CUP", 
+                originalPrice: 1200,
+                category: "ropa", 
+                available: true,
+                image: "fotos/monito-bebe.png",
+                description: "Tallas: 3, 6, 12 meses",
+                size: "3, 6, 12 meses"
+            },
+            // Productos AGOTADOS (solo algunos ejemplos)
+            { 
+                id: 13, 
+                name: "Botellas Metálicas", 
+                price: "AGOTADO", 
+                originalPrice: 2000,
+                category: "hogar", 
+                available: false,
+                image: "fotos/botella-metalica.png",
+                description: "Próximamente disponible"
+            },
+            { 
+                id: 14, 
+                name: "Tazas de Café", 
+                price: "AGOTADO", 
+                originalPrice: 1650,
+                category: "hogar", 
+                available: false,
+                image: "fotos/tazacafe.png",
+                description: "Reabasteciendo inventario"
+            },
+            { 
+                id: 15, 
+                name: "Pop Sochet", 
+                price: "1000 CUP", 
+                originalPrice: 1000,
+                category: "ropa", 
+                available: true,
+                image: "fotos/soporte.png",
+                description: "Tallas: S, M, L, XL",
+                size: "S, M, L, XL"
+            },
+            { 
+                id: 16, 
+                name: "Pullover Blanco", 
+                price: "5 USD", 
+                originalPrice: 5,
+                category: "ropa", 
+                available: true,
+                image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Tallas: S, M, L, XL",
+                size: "S, M, L, XL"
+            }
+        ];
+
+        // ========== ESTADO GLOBAL ==========
+        let cart = JSON.parse(localStorage.getItem('amy-shops-cart')) || [];
+        let currentCategory = 'all';
+        let deliveryType = 'pickup';
+        let deliveryCost = 0;
+        let customerFormVisible = false;
+
+        // ========== FUNCIONES UTILITARIAS ==========
+        function saveCart() {
+            localStorage.setItem('amy-shops-cart', JSON.stringify(cart));
+            updateCartCount();
+        }
+
+        function updateCartCount() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').textContent = totalItems;
+        }
+
+        function updateProductCount(count) {
+            document.getElementById('product-count').textContent = `Mostrando ${count} productos`;
+        }
+
+        function formatPrice(price) {
+            if (typeof price === 'number') {
+                return price.toLocaleString('es-CU') + ' CUP';
+            }
+            return price;
+        }
+
+        function toggleCart() {
+            const sidebar = document.getElementById('cart-sidebar');
+            const overlay = document.getElementById('cart-overlay');
+            
+            if (sidebar.classList.contains('open')) {
+                // Si está abierto, lo cerramos y reseteamos formulario
+                customerFormVisible = false;
+                updateCheckoutButtons();
+                document.getElementById('customer-form').style.display = 'none';
+            }
+            
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('show');
+            
+            if (sidebar.classList.contains('open')) {
+                renderCartItems();
+                updateCartTotals();
+            }
+        }
+
+        function addToCart(product) {
+            if (!product.available) {
+                showNotification('Este producto no está disponible actualmente', 'warning');
+                return;
+            }
+
+            const existingItem = cart.find(item => item.id === product.id);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    ...product,
+                    quantity: 1
+                });
+            }
+            
+            saveCart();
+            showNotification(`${product.name} agregado al carrito`, 'success');
+            
+            if (document.getElementById('cart-sidebar').classList.contains('open')) {
+                renderCartItems();
+                updateCartTotals();
+            }
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            saveCart();
+            renderCartItems();
+            updateCartTotals();
+        }
+
+        function updateQuantity(productId, newQuantity) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                if (newQuantity < 1) {
+                    removeFromCart(productId);
+                } else {
+                    item.quantity = newQuantity;
+                    saveCart();
+                    renderCartItems();
+                    updateCartTotals();
+                }
+            }
+        }
+
+        function clearCart() {
+            if (cart.length === 0) return;
+            
+            if (confirm('¿Estás seguro de que quieres vaciar el carrito?')) {
+                cart = [];
+                saveCart();
+                renderCartItems();
+                updateCartTotals();
+                customerFormVisible = false;
+                updateCheckoutButtons();
+                document.getElementById('customer-form').style.display = 'none';
+                showNotification('Carrito vaciado', 'info');
+            }
+        }
+
+        function updateCartTotals() {
+            const subtotal = cart.reduce((total, item) => {
+                const price = typeof item.originalPrice === 'number' ? item.originalPrice : 0;
+                return total + (price * item.quantity);
+            }, 0);
+            
+            const total = subtotal + deliveryCost;
+            
+            document.getElementById('cart-subtotal').textContent = formatPrice(subtotal);
+            document.getElementById('cart-total').textContent = formatPrice(total);
+            document.getElementById('delivery-cost').textContent = formatPrice(deliveryCost);
+            
+            // Mostrar u ocultar fila de costo de entrega
+            document.getElementById('delivery-cost-row').style.display = deliveryCost > 0 ? 'flex' : 'none';
+        }
+
+        function renderCartItems() {
+            const container = document.getElementById('cart-items');
+            
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="cart-empty">
+                        <div class="cart-empty-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h5 class="text-muted">Tu carrito está vacío</h5>
+                        <p class="text-muted">Agrega productos para verlos aquí</p>
+                        <button class="btn btn-primary mt-3" onclick="toggleCart()">
+                            <i class="fas fa-store me-2"></i> Seguir Comprando
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = '';
+            cart.forEach(item => {
+                const price = typeof item.originalPrice === 'number' ? item.originalPrice : 0;
+                const total = price * item.quantity;
+                
+                html += `
+                    <div class="cart-item">
+                        <div class="d-flex">
+                            <img src="${item.image}" class="rounded me-3" style="width: 70px; height: 70px; object-fit: cover;">
+                            <div class="flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h6 class="fw-bold mb-1">${item.name}</h6>
+                                        <p class="text-muted small mb-1">${item.description || ''}</p>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-danger" onclick="removeFromCart(${item.id})">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <div class="d-flex align-items-center">
+                                        <button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(${item.id}, ${item.quantity - 1})">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <span class="mx-3 fw-bold">${item.quantity}</span>
+                                        <button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(${item.id}, ${item.quantity + 1})">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                    <span class="fw-bold">${formatPrice(total)}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function showCustomerForm() {
+            if (cart.length === 0) {
+                showNotification('Tu carrito está vacío', 'warning');
+                return;
+            }
+            
+            customerFormVisible = true;
+            updateCheckoutButtons();
+            document.getElementById('customer-form').style.display = 'block';
+            document.getElementById('checkout-btn').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function updateCheckoutButtons() {
+            document.getElementById('checkout-btn').style.display = customerFormVisible ? 'none' : 'block';
+            document.getElementById('send-order-btn').style.display = customerFormVisible ? 'block' : 'none';
+        }
+
+        function selectDelivery(element, type) {
+            // Remover selección anterior
+            document.querySelectorAll('.delivery-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Añadir selección actual
+            element.classList.add('selected');
+            
+            // Actualizar costo de entrega
+            deliveryType = type;
+            deliveryCost = type === 'delivery' ? 200 : 0;
+            
+            updateCartTotals();
+        }
+
+        function validateForm() {
+            const name = document.getElementById('customer-name').value.trim();
+            const phone = document.getElementById('customer-phone').value.trim();
+            const address = document.getElementById('customer-address').value.trim();
+            
+            if (!name) {
+                showNotification('Por favor ingresa tu nombre completo', 'warning');
+                return false;
+            }
+            
+            if (!phone) {
+                showNotification('Por favor ingresa tu número de teléfono', 'warning');
+                return false;
+            }
+            
+            if (!address) {
+                showNotification('Por favor ingresa tu dirección', 'warning');
+                return false;
+            }
+            
+            if (!deliveryType) {
+                showNotification('Por favor selecciona un método de entrega', 'warning');
+                return false;
+            }
+            
+            return true;
+        }
+
+        function sendOrder() {
+            if (!validateForm()) return;
+            
+            const phoneNumber = '5352013170';
+            const name = document.getElementById('customer-name').value;
+            const phone = document.getElementById('customer-phone').value;
+            const address = document.getElementById('customer-address').value;
+            const notes = document.getElementById('customer-notes').value;
+            
+            let message = `*NUEVO PEDIDO - AMY'S SHOPS*%0A%0A`;
+            message += `*Fecha:* ${new Date().toLocaleDateString('es-ES')}%0A`;
+            message += `*Hora:* ${new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}%0A%0A`;
+            
+            message += `*INFORMACIÓN DEL CLIENTE:*%0A`;
+            message += `👤 *Nombre:* ${name}%0A`;
+            message += `📱 *Teléfono:* ${phone}%0A`;
+            message += `📍 *Dirección:* ${address}%0A`;
+            message += `🚚 *Entrega:* ${deliveryType === 'delivery' ? 'A domicilio (+200 CUP)' : 'Recogida en tienda'}%0A`;
+            if (notes) {
+                message += `📝 *Notas:* ${notes}%0A`;
+            }
+            message += `%0A`;
+            
+            message += `*DETALLE DEL PEDIDO:*%0A%0A`;
+            
+            let subtotal = 0;
+            cart.forEach((item, index) => {
+                const price = typeof item.originalPrice === 'number' ? item.originalPrice : 0;
+                const itemTotal = price * item.quantity;
+                subtotal += itemTotal;
+                
+                message += `*${index + 1}. ${item.name}*%0A`;
+                message += `   Cantidad: ${item.quantity}%0A`;
+                message += `   Precio unitario: ${item.price}%0A`;
+                message += `   Subtotal: ${formatPrice(itemTotal)}%0A%0A`;
+            });
+            
+            const total = subtotal + deliveryCost;
+            
+            message += `*RESUMEN DE PAGO:*%0A`;
+            message += `Subtotal: ${formatPrice(subtotal)}%0A`;
+            if (deliveryCost > 0) {
+                message += `Costo de entrega: ${formatPrice(deliveryCost)}%0A`;
+            }
+            message += `*TOTAL A PAGAR: ${formatPrice(total)}*%0A%0A`;
+            
+            message += `*MÉTODO DE PAGO:*%0A`;
+            message += `💳 Transferencia bancaria%0A`;
+            message += `💰 Efectivo al recibir%0A`;
+            message += `%0A`;
+            
+            message += `*ESTADO DEL PEDIDO:*%0A`;
+            message += `⏳ Pendiente de confirmación%0A%0A`;
+            
+            message += `¡Gracias por tu pedido! 🎁%0A`;
+            message += `Te contactaremos en breve para confirmar los detalles.`;
+            
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+            
+            // Mostrar confirmación
+            showNotification('Pedido enviado correctamente', 'success');
+            
+            // Limpiar carrito después de enviar
+            setTimeout(() => {
+                cart = [];
+                saveCart();
+                toggleCart();
+            }, 2000);
+        }
+
+        function showNotification(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `position-fixed top-20 end-0 m-3 p-3 bg-${type} text-white rounded shadow fade-in-up`;
+            toast.style.zIndex = '1060';
+            toast.style.maxWidth = '300px';
+            toast.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'} me-2"></i>
+                ${message}
+            `;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.5s';
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
+
+        // ========== COMPONENTE REACT PARA PRODUCTOS ==========
+        function ProductCard({ product }) {
+            const whatsappMessage = `Hola! Estoy interesado en: ${product.name} - ${product.price}. ¿Podrían darme más información?`;
+            const whatsappLink = `https://wa.me/5352013170?text=${encodeURIComponent(whatsappMessage)}`;
+            
+            return (
+                <div className="col-md-6 col-lg-4 col-xl-3 mb-4 fade-in-up">
+                    <div className="card product-card h-100">
+                        <div className="position-relative overflow-hidden">
+                            <img src={product.image} className="product-img" alt={product.name} />
+                            {!product.available && (
+                                <span className="badge product-badge bg-danger">
+                                    <i className="fas fa-times-circle me-1"></i> AGOTADO
+                                </span>
+                            )}
+                        </div>
+                        
+                        <div className="card-body d-flex flex-column">
+                            <h5 className="card-title fw-bold">{product.name}</h5>
+                            
+                            {product.description && (
+                                <p className="text-muted small mb-2">{product.description}</p>
+                            )}
+                            
+                            {product.size && (
+                                <p className="text-muted small mb-2">
+                                    <i className="fas fa-ruler-combined me-1"></i>
+                                    Tallas: {product.size}
+                                </p>
+                            )}
+                            
+                            <div className="mt-auto">
+                                <div className="d-flex justify-content-between align-items-center mb-3">
+                                    <span className="product-price">{product.price}</span>
+                                    <span className="badge bg-light text-dark border">
+                                        {product.category}
+                                    </span>
+                                </div>
+                                
+                                <div className="d-grid gap-2">
+                                    <button 
+                                        className={`btn ${product.available ? 'btn-add-cart' : 'btn-secondary'}`}
+                                        onClick={() => addToCart(product)}
+                                        disabled={!product.available}
+                                    >
+                                        <i className="fas fa-cart-plus me-2"></i>
+                                        {product.available ? 'Agregar al Carrito' : 'No Disponible'}
+                                    </button>
+                                    
+                                    {product.available && (
+                                        <a 
+                                            href={whatsappLink}
+                                            target="_blank"
+                                            className="btn btn-whatsapp"
+                                        >
+                                            <i className="fab fa-whatsapp me-2"></i>
+                                            Consultar por WhatsApp
+                                        </a>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // ========== COMPONENTE REACT PARA LISTA DE PRODUCTOS ==========
+        function ProductsList() {
+            const [products, setProducts] = React.useState(productsData);
+            
+            const filterByCategory = (category) => {
+                currentCategory = category;
+                
+                // Actualizar badges activos
+                document.querySelectorAll('.category-badge').forEach(badge => {
+                    badge.classList.remove('active', 'bg-primary', 'text-white');
+                    badge.classList.add('bg-light', 'text-dark');
+                });
+                
+                const activeBadge = document.querySelector(`[data-category="${category}"]`);
+                if (activeBadge) {
+                    activeBadge.classList.add('active', 'bg-primary', 'text-white');
+                    activeBadge.classList.remove('bg-light', 'text-dark');
+                }
+                
+                if (category === 'all') {
+                    setProducts(productsData);
+                    updateProductCount(productsData.length);
+                } else {
+                    const filtered = productsData.filter(p => p.category === category);
+                    setProducts(filtered);
+                    updateProductCount(filtered.length);
+                }
+            };
+            
+            // Inicializar categorías
+            React.useEffect(() => {
+                filterByCategory('all');
+                
+                // Agregar event listeners a los badges
+                document.querySelectorAll('.category-badge').forEach(badge => {
+                    badge.addEventListener('click', function() {
+                        const category = this.getAttribute('data-category');
+                        filterByCategory(category);
+                    });
+                });
+            }, []);
+            
+            return (
+                <div className="row g-4">
+                    {products.map(product => (
+                        <ProductCard key={product.id} product={product} />
+                    ))}
+                </div>
+            );
+        }
+
+        // ========== INICIALIZAR LA APLICACIÓN ==========
+        function App() {
+            return (
+                <div>
+                    <ProductsList />
+                </div>
+            );
+        }
+
+        // ========== RENDERIZAR LA APLICACIÓN ==========
+        ReactDOM.render(<App />, document.getElementById('products-container'));
+        
+        // ========== INICIALIZAR ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+            
+            // Smooth scroll para enlaces internos
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        e.preventDefault();
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Añadir animación de scroll a elementos
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in-up');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observar elementos para animaciones
+            document.querySelectorAll('.card, .feature-icon, .testimonial-card, .stat-card').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Inicializar selección de entrega
+            const pickupOption = document.querySelector('[data-type="pickup"]');
+            if (pickupOption) {
+                pickupOption.click();
+            }
+        });
+    </script>
+</body>
+</html>
